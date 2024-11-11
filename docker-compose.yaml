@@ -1,0 +1,42 @@
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+    container_name: app-cowork
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/
+    environment: #tener en cuenta que las credenciales de aquí serán las mismas utilizadas en .env
+      - DB_HOST=db
+      - DB_DATABASE=cowork
+      - DB_USERNAME=twander
+      - DB_PASSWORD=TwGroUp-CoW0Rk3R.!
+    #    ports:
+    #      - "8000:8000"
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:1.19-alpine
+    container_name: server-cowork
+    restart: on-failure
+    ports:
+      - "8005:80"
+    volumes:
+      - .:/var/www/
+      - ./nginx:/etc/nginx/conf.d
+
+  db:
+    image: mysql:latest
+    restart: on-failure
+    container_name: db-cowork
+    ports:
+      - 3306:3306
+#    network_mode: host
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cowork
+      MYSQL_USER: twander
+      MYSQL_PASSWORD: TwGroUp-CoW0Rk3R.!
