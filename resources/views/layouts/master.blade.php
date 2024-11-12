@@ -11,6 +11,13 @@
     <!-- AdminLTE CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+
     <!-- FontAwesome para íconos de AdminLTE -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMIezMIq9ZZgWRfZZRRk6tNOnE/YjN9f5ZaIJO4" crossorigin="anonymous">
 

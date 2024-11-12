@@ -330,7 +330,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Gestión de salas',
-            'url' => 'admin/settings',
+            'url' => '/gestion-salas',
             'icon' => 'fa fa-table',
         ],
         [
