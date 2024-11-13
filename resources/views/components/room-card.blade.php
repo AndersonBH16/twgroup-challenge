@@ -11,7 +11,7 @@
             @endif
 
         </div>
-        <div class="card-body">
+        <div class="card-body" style="overflow-y: auto;">
             <div class="d-flex">
                 <span class="card-text"><strong>Capacidad:</strong> {{ $room->capacity }}</span><br>
                 <h6 class="card-text ml-auto">
@@ -30,8 +30,10 @@
             <strong>Descripción:</strong>
             <p class="card-text">{{ $room->description }}</p>
             <div class="d-flex">
-                <button class="btn btn-warning btn-xs ml-auto mr-2" title="Modificar información de la sala"><span class="fa fa-edit"></span></button>
-                <button class="btn btn-danger btn-xs" title="Eliminar sala"><i class="fa fa-trash-alt"></i></button>
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <button class="btn btn-warning btn-xs ml-auto mr-2" title="Modificar información de la sala"><span class="fa fa-edit"></span></button>
+                    <button class="btn btn-danger btn-xs" title="Eliminar sala"><i class="fa fa-trash-alt"></i></button>
+                @endif
             </div>
         </div>
     </div>
