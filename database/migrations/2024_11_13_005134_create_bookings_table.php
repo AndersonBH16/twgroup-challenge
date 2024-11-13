@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('room_id')->constrained()->onDelete('cascade');
             $table->timestamps();
-
+            
             $table->unique(['date', 'time', 'room_id']);
         });
     }

@@ -1,17 +1,22 @@
 $(document).ready(function() {
-    $('#fecha').datetimepicker({
-        format: 'DD - MM - YYYY',
-        locale: 'es',
-        autoclose: true,
-        icons: { close: 'fa fa-times' }
-    });
 
-    $('#hora').datetimepicker({
-        format: 'LT',
-        locale: 'es',
-        autoclose: true,
-        icons: { close: 'fa fa-times' }
-    });
+    const datetimePickerInitConfig = () => {
+        $('#fecha').datetimepicker({
+            format: 'DD - MM - YYYY',
+            locale: 'es',
+            autoclose: true,
+            icons: { close: 'fa fa-times' }
+        });
+
+        $('#hora').datetimepicker({
+            format: 'LT',
+            locale: 'es',
+            autoclose: true,
+            icons: { close: 'fa fa-times' }
+        });
+    };
+
+    datetimePickerInitConfig();
 
     $('#clearFecha').on('click', function() {
         $('#fecha').datetimepicker('clear');
@@ -30,7 +35,7 @@ $(document).ready(function() {
     $('#crearReservaForm').on('submit', function(e) {
         e.preventDefault();
 
-        $('button').prop('disabled', true);
+        $('.reservar').prop('disabled', true);
         $('#loading-spinner').show();
 
         $.ajax({
@@ -38,6 +43,7 @@ $(document).ready(function() {
             method: 'POST',
             data: $(this).serialize(),
             success: function(response) {
+                console.log(response);
                 $('#loading-spinner').hide();
                 $('#crearReservaForm :input').prop('disabled', false);
 
@@ -45,10 +51,16 @@ $(document).ready(function() {
                 $('#crearReservaModal').modal('hide');
                 $('#crearReservaForm')[0].reset();
 
-                $(`.room-card[data-room-id="${response.room_id}"] .room-state`)
-                    .text('reservado')
-                    .removeClass('text-success')
-                    .addClass('text-danger');
+                $(`button[data-room-id="${response.room_id}"]`)
+                    .text('En revisión...')
+                    .prop('disabled', true)
+                    .removeClass('btn-info')
+                    .addClass('btn-default');
+
+                $(`.room-card[data-room-id="${response.room_id}"] .state`)
+                    .text(response.room_state)
+                    .removeClass('badge-success')
+                    .addClass('badge-secondary');
             },
             error: function(xhr) {
                 $('#loading-spinner').hide();

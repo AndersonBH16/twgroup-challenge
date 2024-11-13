@@ -69,12 +69,13 @@ class BookingController extends Controller
         ]);
 
         $room = Room::find($request->room_id);
-        $room->update(['state' => 'reservado']);
+        $newState = 'pendiente';
+        $room->update(['state' => $newState]);
 
         return response()->json([
             'booking' => $booking,
             'room_id' => $request->room_id,
-            'room_state' => 'reservado'
+            'room_state' => $newState
         ], 201);
     }
 
