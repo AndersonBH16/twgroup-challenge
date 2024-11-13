@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,7 +14,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        return view('booking.index');
+        $rooms = Room::orderBy('id', 'desc')->get();
+        return view('reservas.index', compact('rooms'));
     }
 
     public function getAll(){

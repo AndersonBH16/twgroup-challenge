@@ -13,12 +13,12 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
+        $rooms = Room::orderBy('id', 'desc')->get();
         return view('salas.index', compact('rooms'));
     }
 
     public function getAll(){
-        $rooms = Room::all();
+        $rooms = Room::all()->sortByDesc;
         return response()->json($rooms);
     }
 
