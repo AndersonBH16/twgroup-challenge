@@ -329,13 +329,13 @@ return [
 //        ],
         ['header' => 'account_settings'],
         [
-            'text' => 'Gestión de salas',
+            'text' => 'Gestión de Salas',
             'url' => '/gestion-salas',
             'icon' => 'fa fa-table',
         ],
         [
             'text' => 'Lista de Reservas',
-            'url' => 'admin/settings',
+            'url' => '/gestion-reservas',
             'icon' => 'fa fa-list-alt',
         ],
     ],

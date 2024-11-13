@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::get('/gestion-salas', [RoomController::class, 'index']);
+    Route::post('/rooms', [RoomController::class, 'store'])->name('crear-sala');
+    Route::get('/gestion-reservas', [BookingController::class, 'index']);
 });

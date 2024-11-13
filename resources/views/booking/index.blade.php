@@ -4,19 +4,19 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h3>Gestión de Salas Coworking</h3>
+    <h3>Gestión de Reservas</h3>
 @endsection
 
 @section('content')
-    <div class="card card-info card-outline mb-4">
+    <div class="card card-info card-outline mb-4"> <!--begin::Header-->
         <div class="card-header">
             <div class="card-title">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#crearSala">Crear sala</button>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#crearSala">Crear reserva</button>
             </div>
-        </div>
+        </div> <!--end::Header--> <!--begin::Body-->
         <div class="card-body">
 
-        </div>
+        </div> <!--end::Body-->
     </div>
     @include('salas.modal.crear')
 @endsection
