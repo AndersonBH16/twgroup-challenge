@@ -13,6 +13,10 @@
             </div>
             <strong>Descripción:</strong>
             <p class="card-text">{{ $room->description }}</p>
+            <div class="d-flex">
+                <button class="btn btn-warning btn-xs ml-auto mr-2" title="Modificar información de la sala"><span class="fa fa-edit"></span></button>
+                <button class="btn btn-danger btn-xs" title="Eliminar sala"><i class="fa fa-trash-alt"></i></button>
+            </div>
         </div>
     </div>
 </div>

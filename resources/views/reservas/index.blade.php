@@ -2,6 +2,10 @@
 
 @section('title', 'Dashboard')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+@endsection
+
 @section('content_header')
     <h3>Reservas de Salas</h3>
 @endsection
@@ -20,7 +24,8 @@
     @include('reservas.modal.crear')
 @endsection
 @section('js')
-    <script src="{{ asset('reservas/reservas.js') }}"></script>
     <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+    <script src="{{ asset('reservas/reservas.js') }}"></script>
 @stop
 

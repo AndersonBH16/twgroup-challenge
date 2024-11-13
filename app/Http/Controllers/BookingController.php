@@ -58,7 +58,10 @@ class BookingController extends Controller
         }
 
         $booking = Booking::create($request->all());
-        return response()->json($booking, 201);
+        return response()->json([
+            'booking' => $booking,
+            'room_id' => $request->room_id
+        ], 201);
     }
 
     /**
