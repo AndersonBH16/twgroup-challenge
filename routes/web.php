@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,5 +17,5 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/gestion-salas', [\App\Http\Controllers\SalaController::class, 'index']);
+    Route::get('/gestion-salas', [RoomController::class, 'index']);
 });
