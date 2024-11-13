@@ -4,7 +4,7 @@
             <div class="card-title">
                 <h5><b>Sala: {{ $room->number }} - {{ $room->name }}</b></h5>
             </div>
-            <button type="button" class="btn btn-info ml-auto" data-toggle="modal" data-target="#crearReservaModal">Reservar</button>
+            <button type="button" class="btn btn-info ml-auto btn-reservar" data-room-id="{{ $room->id }}" data-toggle="modal" data-target="#crearReservaModal">Reservar</button>
         </div>
         <div class="card-body">
             <div class="row">

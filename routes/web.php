@@ -21,5 +21,5 @@ Route::middleware([
     Route::get('/gestion-salas', [RoomController::class, 'index']);
     Route::post('/crear-sala', [RoomController::class, 'store']);
     Route::get('/gestion-reservas', [BookingController::class, 'index']);
-    Route::get('/reservar', [BookingController::class, 'store']);
+    Route::post('/crear-reserva', [BookingController::class, 'store']);
 });

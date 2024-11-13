@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class BookingController extends Controller
@@ -37,16 +39,17 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'fecha' => 'required|date',
-            'hora' => 'required|date_format:H:i',
-            'estado' => 'required|in:pendiente,en proceso,cancelado',
-            'user_id' => 'required|exists:users,id',
+            'fecha' => 'required|date_format:d - m - Y',
+            'hora' => 'required|date_format:g:i A',
             'room_id' => 'required|exists:rooms,id',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
+
+        $fecha = Carbon::createFromFormat('d - m - Y', $request->fecha)->format('Y-m-d');
+        $hora = Carbon::createFromFormat('g:i A', $request->hora)->format('H:i:s');
 
         $exists = Booking::where('date', $request->fecha)
             ->where('time', $request->hora)
@@ -57,12 +60,24 @@ class BookingController extends Controller
             return response()->json(['error' => 'Ya existe una reserva para esa sala en el mismo horario'], 409);
         }
 
-        $booking = Booking::create($request->all());
+        $booking = Booking::create([
+            'date' => $fecha,
+            'time' => $hora,
+            'state' => 'pendiente',
+            'user_id' => $request->user()->id,
+            'room_id' => $request->room_id,
+        ]);
+
+        $room = Room::find($request->room_id);
+        $room->update(['state' => 'reservado']);
+
         return response()->json([
             'booking' => $booking,
-            'room_id' => $request->room_id
+            'room_id' => $request->room_id,
+            'room_state' => 'reservado'
         ], 201);
     }
+
 
     /**
      * Display the specified resource.

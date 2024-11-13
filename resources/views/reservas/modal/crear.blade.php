@@ -7,13 +7,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                <form id="crearReservaForm">
+                <form id="crearReservaForm" type="POST">
                     <div class="modal-body">
                         @csrf
+                        <input type="hidden" id="roomIdInput" name="room_id">
                         <div class="form-group row">
                             <label for="fecha">Fecha:</label>
                             <div class="input-group date" id="fecha" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#fecha"/>
+                                <input type="text" name="fecha" class="form-control datetimepicker-input" data-target="#fecha"/>
                                 <div class="input-group-append mr-2" data-target="#fecha" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -25,7 +26,7 @@
                         <div class="form-group row">
                             <label for="hora">Hora:</label>
                             <div class="input-group date" id="hora" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#hora"/>
+                                <input type="text" name="hora" class="form-control datetimepicker-input" data-target="#hora"/>
                                 <div class="input-group-append mr-2" data-target="#hora" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-clock"></i></div>
                                 </div>

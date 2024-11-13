@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->date('date');
             $table->time('time');
-            $table->enum('state', ['pendiente', 'en proceso', 'cancelado'])->default('pendiente');
+            $table->enum('state', ['pendiente', 'aceptada', 'rechazada'])->default('pendiente');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('room_id')->constrained()->onDelete('cascade');
             $table->timestamps();
