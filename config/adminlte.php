@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -329,12 +331,13 @@ return [
 //        ],
         ['header' => 'account_settings'],
         [
-            'text' => 'Gestión de Salas',
+            'text' => 'Salas de coworking',
             'url' => '/gestion-salas',
             'icon' => 'fa fa-table',
+            'can' => 'isAdminView'
         ],
         [
-            'text' => 'Lista de Reservas',
+            'text' => 'Reservas',
             'url' => '/gestion-reservas',
             'icon' => 'fa fa-list-alt',
         ],

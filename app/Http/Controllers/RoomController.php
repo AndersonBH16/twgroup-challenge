@@ -13,8 +13,12 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::orderBy('id', 'desc')->get();
-        return view('salas.index', compact('rooms'));
+        if (auth()->user()->role !== 'admin') {
+            return redirect('/dashboard');
+        }else{
+            $rooms = Room::orderBy('id', 'desc')->get();
+            return view('salas.index', compact('rooms'));
+        }
     }
 
     public function getAll(){
