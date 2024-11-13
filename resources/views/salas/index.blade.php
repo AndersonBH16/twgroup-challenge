@@ -3,6 +3,10 @@
 
 @section('title', 'Dashboard')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
+@endsection
+
 @section('content_header')
     <h3>Gestión de Salas Coworking</h3>
 @endsection
@@ -15,9 +19,25 @@
             </div>
         </div>
         <div class="card-body">
-
+            <div id="rooms-container" class="row g-3">
+                @foreach ($rooms as $room)
+                    <div class="col-md-4 room-card" data-room-id="{{ $room->id }}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $room->name }} - <span><b>{{ $room->state }}</b></span></h5>
+                                <p class="card-text"><strong>Capacidad:</strong> {{ $room->capacity }}</p>
+                                <p class="card-text"><strong>Descripción:</strong> {{ $room->description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
     @include('salas.modal.crear')
 @endsection
+@section('js')
+    <script src="{{ asset('rooms/rooms.js') }}"></script>
+    <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+@stop
 

@@ -13,8 +13,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $states = [''];
-        return view('salas.index');
+        $rooms = Room::all();
+        return view('salas.index', compact('rooms'));
     }
 
     public function getAll(){

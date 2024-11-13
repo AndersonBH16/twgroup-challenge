@@ -19,6 +19,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::get('/gestion-salas', [RoomController::class, 'index']);
-    Route::post('/rooms', [RoomController::class, 'store'])->name('crear-sala');
+    Route::post('/crear-sala', [RoomController::class, 'store']);
     Route::get('/gestion-reservas', [BookingController::class, 'index']);
 });

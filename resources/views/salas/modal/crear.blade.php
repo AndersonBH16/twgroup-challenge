@@ -7,7 +7,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="{{ route('crear-sala') }}" method="POST">
+            <form id="crearSalaForm" method="POST">
                 <div class="modal-body">
                 @csrf
                 <div class="form-group">
