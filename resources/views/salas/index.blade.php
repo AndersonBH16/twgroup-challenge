@@ -21,15 +21,8 @@
         <div class="card-body">
             <div id="rooms-container" class="row g-3">
                 @foreach ($rooms as $room)
-                    <div class="col-md-4 room-card" data-room-id="{{ $room->id }}">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $room->name }} - <span><b>{{ $room->state }}</b></span></h5>
-                                <p class="card-text"><strong>Capacidad:</strong> {{ $room->capacity }}</p>
-                                <p class="card-text"><strong>Descripción:</strong> {{ $room->description }}</p>
-                            </div>
-                        </div>
-                    </div>
+                    @component('components.room-card', ['room' => $room])
+                    @endcomponent
                 @endforeach
             </div>
         </div>

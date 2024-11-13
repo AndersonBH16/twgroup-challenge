@@ -52,7 +52,9 @@ class RoomController extends Controller
             'capacity' => $request->input('capacity'),
             'state' => 'disponible',
         ]);
-        return response()->json($room, 201);
+
+        $roomCardHtml = view('components.room-card', compact('room'))->render();
+        return response()->json(['roomCardHtml' => $roomCardHtml], 201);
     }
 
     /**
