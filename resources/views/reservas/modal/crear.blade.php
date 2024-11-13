@@ -1,43 +1,51 @@
-<div class="modal fade" id="crearReservaModal" tabindex="-1" aria-labelledby="crearReservaModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="crearReservaModal" tabindex="-1" role="dialog" aria-labelledby="crearReservaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-info">
+            <div class="modal-header">
                 <h5 class="modal-title" id="crearReservaModalLabel">Crear Reserva</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="crearReservaForm">
-                <div class="modal-body">
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                    <input type="hidden" name="room_id" id="roomIdInput">
-                    <input type="hidden" name="state" value="pendiente">
-
-                    <div class="container mt-3">
-                        <label for="fecha">Fecha:</label>
-                        <div class="input-group date" data-provide="datepicker">
+                <form id="crearReservaForm">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group row">
+                            <label for="fecha">Fecha:</label>
                             <div class="input-group date" id="fecha" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
-                                <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+                                <input type="text" class="form-control datetimepicker-input" data-target="#fecha"/>
+                                <div class="input-group-append mr-2" data-target="#fecha" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
+                                <button type="button" id="clearFecha" class="btn btn-outline-light btn-xs rounded-circle text-center align-self-center" style="width: 20px; height: 20px;">
+                                    <i class="fas fa-times"></i>
+                                </button>
                             </div>
                         </div>
-                        <input type="text" id="fecha" class="form-control" placeholder="yyyy-mm-dd">
+                        <div class="form-group row">
+                            <label for="hora">Hora:</label>
+                            <div class="input-group date" id="hora" data-target-input="nearest">
+                                <input type="text" class="form-control datetimepicker-input" data-target="#hora"/>
+                                <div class="input-group-append mr-2" data-target="#hora" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                </div>
+                                <span type="button" id="clearHora" class="btn btn-outline-light btn-xs rounded-circle text-center align-self-center" style="width: 20px; height: 20px;">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="hora">Hora:</label>
-                        <input type="text" class="form-control" id="hora" name="hora" placeholder="Seleccione la hora" required>
+                    <div class="modal-footer">
+                        <div class="text-center" id="loading-spinner" style="display: none;">
+                            <div class="spinner-border text-info" role="status">
+                                <span class="sr-only">Cargando...</span>
+                            </div>
+                            <label class="mr-4">Espere un momento</label>
+                        </div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-outline-info">Reservar</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <span id="loading-message" style="display: none;" class="text-info">Guardando reserva, por favor espere...</span>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Reservar</button>
-                </div>
-            </form>
+                </form>
         </div>
     </div>
 </div>
