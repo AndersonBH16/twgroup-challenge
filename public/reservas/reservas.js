@@ -42,25 +42,16 @@ $(document).ready(function() {
             url: '/crear-reserva',
             method: 'POST',
             data: $(this).serialize(),
-            success: function(response) {
-                console.log(response);
-                $('#loading-spinner').hide();
-                $('#crearReservaForm :input').prop('disabled', false);
+            success: function(response, xhr) {
+                if(xhr === "success"){
+                    $('#loading-spinner').hide();
+                    $('button').prop('disabled', false);
 
-                toastr.success("Reserva creada con éxito");
-                $('#crearReservaModal').modal('hide');
-                $('#crearReservaForm')[0].reset();
-
-                $(`button[data-room-id="${response.room_id}"]`)
-                    .text('En revisión...')
-                    .prop('disabled', true)
-                    .removeClass('btn-info')
-                    .addClass('btn-default');
-
-                $(`.room-card[data-room-id="${response.room_id}"] .state`)
-                    .text(response.room_state)
-                    .removeClass('badge-success')
-                    .addClass('badge-secondary');
+                    toastr.success("Reserva creada con éxito");
+                    $('#crearReservaModal').modal('hide');
+                    $('#fecha').datetimepicker('clear');
+                    $('#hora').datetimepicker('clear');
+                }
             },
             error: function(xhr) {
                 $('#loading-spinner').hide();

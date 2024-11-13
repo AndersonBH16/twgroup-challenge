@@ -4,11 +4,12 @@
             <div class="card-title">
                 <h5><b>Sala: {{ $room->number }} - {{ $room->name }}</b></h5>
             </div>
-            @if($room->state === 'disponible')
-                <button type="button" class="btn btn-info ml-auto btn-reservar btn-sm" data-room-id="{{ $room->id }}" data-toggle="modal" data-target="#crearReservaModal">Reservar</button>
-            @elseif($room->state === 'pendiente')
-                <button type="button" class="btn btn-default ml-auto btn-sm" disabled>En revisión...</button>
-            @endif
+            <button type="button" class="btn btn-info ml-auto btn-reservar btn-sm" data-room-id="{{ $room->id }}" data-toggle="modal" data-target="#crearReservaModal">Reservar</button>
+{{--            @if($room->state === 'disponible')--}}
+{{--                <button type="button" class="btn btn-info ml-auto btn-reservar btn-sm" data-room-id="{{ $room->id }}" data-toggle="modal" data-target="#crearReservaModal">Reservar</button>--}}
+{{--            @elseif($room->state === 'pendiente')--}}
+{{--                <button type="button" class="btn btn-default ml-auto btn-sm" disabled>En revisión...</button>--}}
+{{--            @endif--}}
 
         </div>
         <div class="card-body" style="overflow-y: auto;">
@@ -20,7 +21,6 @@
                         @elseif ($room->state == 'ocupado') badge-dark
                         @elseif ($room->state == 'reservado') badge-warning
                         @elseif ($room->state == 'mantenimiento') badge-danger
-                        @elseif ($room->state == 'pendiente') badge-secondary
                         @endif">
                         {{ $room->state }}
                     </span>

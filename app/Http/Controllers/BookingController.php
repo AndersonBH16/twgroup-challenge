@@ -7,6 +7,7 @@ use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class BookingController extends Controller
@@ -49,11 +50,15 @@ class BookingController extends Controller
         }
 
         $fecha = Carbon::createFromFormat('d - m - Y', $request->fecha)->format('Y-m-d');
-        $hora = Carbon::createFromFormat('g:i A', $request->hora)->format('H:i:s');
+        $horaInicio = Carbon::createFromFormat('g:i A', $request->hora)->format('H:i:s');
+        $horaFin = Carbon::createFromFormat('H:i:s', $horaInicio)->addHour()->format('H:i:s');
 
-        $exists = Booking::where('date', $request->fecha)
-            ->where('time', $request->hora)
+        $exists = Booking::where('date', $fecha)
             ->where('room_id', $request->room_id)
+            ->where(function ($query) use ($horaInicio, $horaFin) {
+                $query->whereBetween('time', [$horaInicio, $horaFin])
+                ->orWhereBetween(DB::raw("DATE_ADD(time, INTERVAL 1 HOUR)"), [$horaInicio, $horaFin]);
+            })
             ->exists();
 
         if ($exists) {
@@ -62,20 +67,15 @@ class BookingController extends Controller
 
         $booking = Booking::create([
             'date' => $fecha,
-            'time' => $hora,
+            'time' => $horaInicio,
             'state' => 'pendiente',
             'user_id' => $request->user()->id,
             'room_id' => $request->room_id,
         ]);
 
-        $room = Room::find($request->room_id);
-        $newState = 'pendiente';
-        $room->update(['state' => $newState]);
-
         return response()->json([
             'booking' => $booking,
             'room_id' => $request->room_id,
-            'room_state' => $newState
         ], 201);
     }
 
