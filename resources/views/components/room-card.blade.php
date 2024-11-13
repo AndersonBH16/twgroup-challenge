@@ -7,10 +7,20 @@
             <button type="button" class="btn btn-info ml-auto btn-reservar" data-room-id="{{ $room->id }}" data-toggle="modal" data-target="#crearReservaModal">Reservar</button>
         </div>
         <div class="card-body">
-            <div class="row">
-                <span class="card-text mr-4">{{ $room->state }}</span>
-                <span class="card-text"><strong>Capacidad:</strong> {{ $room->capacity }}</span>
+            <div class="d-flex">
+                <span class="card-text"><strong>Capacidad:</strong> {{ $room->capacity }}</span><br>
+                <h6 class="card-text ml-auto">
+                    <span class="badge
+                        @if ($room->state == 'disponible') badge-success
+                        @elseif ($room->state == 'ocupado') badge-info
+                        @elseif ($room->state == 'reservado') badge-warning
+                        @elseif ($room->state == 'mantenimiento') badge-danger
+                        @endif">
+                        {{ $room->state }}
+                    </span>
+                </h6>
             </div>
+
             <strong>Descripción:</strong>
             <p class="card-text">{{ $room->description }}</p>
             <div class="d-flex">
