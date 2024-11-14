@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\BookingsDataTable;
 use App\Models\Booking;
 use App\Models\Room;
 use Carbon\Carbon;
@@ -21,9 +22,8 @@ class BookingController extends Controller
         return view('reservas.index', compact('rooms'));
     }
 
-    public function getAll(){
-        $bookings = Booking::with(['user', 'room'])->get();
-        return response()->json($bookings);
+    public function showAll(BookingsDataTable $dataTable){
+        return $dataTable->render('reservas.show');
     }
 
     /**

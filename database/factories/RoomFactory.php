@@ -31,7 +31,7 @@ class RoomFactory extends Factory
             'name' => $this->faker->word . ' Room',
             'capacity' => $this->faker->numberBetween(1, 50),
             'description' => $this->faker->sentence,
-            'state' => $this->faker->randomElement(['disponible', 'ocupado', 'reservado', 'mantenimiento']),
+            'state' => 'disponible',
         ];
     }
 }

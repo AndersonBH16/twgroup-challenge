@@ -285,7 +285,10 @@ return [
     */
 
     'laravel_asset_bundling' => false,
-    'laravel_css_path' => 'css/app.css',
+    'laravel_css_path' => [
+        'resources/css/app.css',
+        'resources/sass/app.scss',
+    ],
     'laravel_js_path' => 'js/app.js',
 
     /*
@@ -340,6 +343,11 @@ return [
             'text' => 'Reservas',
             'url' => '/gestion-reservas',
             'icon' => 'fa fa-list-alt',
+        ],
+        [
+            'text' => 'Ver Reservas',
+            'url' => '/ver-reservas',
+            'icon' => 'fa fa-list',
         ],
     ],
 

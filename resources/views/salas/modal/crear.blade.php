@@ -36,8 +36,8 @@
                         <div class="spinner-border text-info" role="status">
                             <span class="sr-only">Cargando...</span>
                         </div>
+                        <label class="mr-4">Espere un momento</label>
                     </div>
-                    <label class="mr-4">Espere un momento</label>
 
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-outline-info">Crear</button>

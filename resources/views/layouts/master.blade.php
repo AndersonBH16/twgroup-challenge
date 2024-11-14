@@ -1,50 +1,45 @@
-<!-- resources/views/layouts/adminlte.blade.php -->
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('adminlte::page')
 
-    <title>@yield('title', config('app.name', 'Laravel'))</title>
+@section('title')
+    {{ config('adminlte.title') }}
+    @hasSection('subtitle') | @yield('subtitle') @endif
+@stop
 
-    <!-- AdminLTE CSS -->
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+@section('content_header')
+    @hasSection('content_header_title')
+        <h1 class="text-muted">
+            @yield('content_header_title')
 
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        *{
-            font-family: 'Roboto', sans-serif;
-        }
-    </style>
+            @hasSection('content_header_subtitle')
+                <small class="text-dark">
+                    <i class="fas fa-xs fa-angle-right text-muted"></i>
+                    @yield('content_header_subtitle')
+                </small>
+            @endif
+        </h1>
+    @endif
+@stop
 
-    <!-- FontAwesome para íconos de AdminLTE -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMIezMIq9ZZgWRfZZRRk6tNOnE/YjN9f5ZaIJO4" crossorigin="anonymous">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-    <!-- Navbar, Sidebar y Contenido -->
-    @include('layouts.navbar')
-    @include('layouts.sidebar')
+@section('content')
+    @yield('content_body')
+@stop
 
-    <div class="content-wrapper">
-        <section class="content-header">
-            @yield('content_header')
-        </section>
-
-        <section class="content">
-            @yield('content')
-        </section>
+@section('footer')
+    <div class="float-right">
+        Version: {{ config('app.version', '1.0.0') }}
     </div>
-</div>
 
-<!-- jQuery y AdminLTE JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRvQ3hbLx6DF7CrZ3N3q6Az8s5fbxyWkv1QhKdgyM" crossorigin="anonymous"></script>
-<script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
+    <strong>
+        <a href="{{ config('app.company_url', '#') }}">
+            {{ config('app.company_name', 'My company') }}
+        </a>
+    </strong>
+@stop
 
-@livewireScripts
-@stack('js')
-</body>
-</html>
+@push('js')
+    @vite('resources/js/app.js')
+@endpush
+
+@push('css')
+    @vite(['resources/css/app.css', 'resources/sass/app.scss'])
+@endpush

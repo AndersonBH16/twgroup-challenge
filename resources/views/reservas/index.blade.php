@@ -25,6 +25,9 @@
     @include('reservas.modal.crear')
 @endsection
 @section('js')
+    <script>
+        alert("RESERVAS INDEX");
+    </script>
     <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
     <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>

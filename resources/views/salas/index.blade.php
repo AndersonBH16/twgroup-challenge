@@ -29,8 +29,8 @@
     </div>
     @include('salas.modal.crear')
 @endsection
-@section('js')
+@push('scripts')
     <script src="{{ asset('rooms/rooms.js') }}"></script>
     <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
-@stop
+@endpush
 
